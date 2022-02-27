@@ -157,7 +157,10 @@ func NewWorker(uri string, statsChan chan StatItem) *Worker {
 func (w *Worker) Run() {
 	for {
 		targetUrl := fmt.Sprintf("%s?%d", w.uri, rand.Intn(10000000000000))
-		resp, err := http.Get(targetUrl)
+		client := http.Client{
+			Timeout: 1 * time.Second,
+		}
+		resp, err := client.Get(targetUrl)
 		if err != nil {
 			// handle error, add to stats ?
 			w.stats <- StatItem{Uri: w.uri, Error: true, Hit: true}
