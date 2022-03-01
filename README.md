@@ -12,3 +12,7 @@ Build from source or run from binary.
 
 Build: `make build`
 Binary is in `bin` directory
+
+# Release
+
+Prepare all releases by running `make release`
